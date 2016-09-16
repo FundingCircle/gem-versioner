@@ -1,4 +1,14 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in gem-versioner.gemspec
+group :development, :test do
+  gem 'rubocop', require: false
+  gem 'pry'
+  gem 'pronto', require: false
+  gem 'pronto-brakeman', require: false
+  gem 'pronto-fasterer', require: false
+  gem 'pronto-rails_best_practices', require: false
+  gem 'pronto-rails_schema', require: false
+  gem 'pronto-rubocop', require: false
+end
+
 gemspec

@@ -1,0 +1,4 @@
+test:
+  pre:
+    - bundle exec rubocop
+    - bundle exec pronto run --commit origin/master

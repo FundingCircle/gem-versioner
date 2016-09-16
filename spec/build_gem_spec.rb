@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'yaml'
 
 describe Gem::Versioner do
-  let(:current_gem_version) {Gem::Versioner::VERSION}
+  let(:current_gem_version) { Gem::Versioner::VERSION }
   let(:gem_spec) { YAML.load(`gem spec gem-versioner*.gem version`) }
 
   before do

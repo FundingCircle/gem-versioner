@@ -1,13 +1,16 @@
 require 'rubygems/versioner'
 require 'rubygems/package'
 
-class Gem::Package
-  class << self
-    alias_method :build_original, :build
+module Gem
+  # main Gem::Package of rubygems
+  class Package
+    class << self
+      alias build_original build
 
-    def build(spec, skip_validation=false)
-      spec.version = Gem::Versioner.release_version(spec.version)
-      build_original(spec, skip_validation)
+      def build(spec, skip_validation = false)
+        spec.version = Gem::Versioner.release_version(spec.version)
+        build_original(spec, skip_validation)
+      end
     end
   end
 end
