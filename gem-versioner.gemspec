@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'gem/versioner/version'
+require 'rubygems/versioner/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "gem-versioner"
   spec.version       = Gem::Versioner::VERSION
-  spec.authors       = ["Antonis Berkakis"]
-  spec.email         = ["aberkakis@gmail.com"]
+  spec.authors     = %w(Funding Circle UK Ltd)
+  spec.email       = 'tech@fundingcircle.com'
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Write a short summary, because Rubygems requires one.}
+  spec.description   = %q{Write a longer description or delete this line.}
+  spec.homepage      = "https://github.com/FundingCircle/gem-versione"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
