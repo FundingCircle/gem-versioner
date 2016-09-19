@@ -1,4 +1,12 @@
 test:
   pre:
     - bundle exec rubocop
-    - bundle exec pronto run --commit origin/master
+    - bundle exec pronto run --commit origin/master --exit-code
+deployment:
+  rubygems:
+    branch: master
+    commands:
+      - "gem build gem-versioner.gemspec"
+      - 'echo :rubygems_api_key: ${RUBYGEMS_API_KEY} >  ~/.gem/credentials'
+      - "chmod 0600 ~/.gem/credentials"
+      - "gem push gem-versioner-*.gem"
