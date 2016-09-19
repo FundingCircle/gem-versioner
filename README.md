@@ -14,11 +14,11 @@ Install it yourself as:
 ## Usage
 
 when you build a gem e.g. `my-gem`
-you can specify a pre release by
+you can specify a pre release version by
 
     $ PRE_RELEASE=foo build my-gem.gemspec
     
-This will output a version like `$version.pre${my_branch}.${current_timestamp}`
+This will build a gem with a version in the following format `${gem_version}.pre.${PRE_RELEASE}.${current_timestamp}` , for example: `0.0.1.pre.foo.20160919174006`
 
 ## Development
 
