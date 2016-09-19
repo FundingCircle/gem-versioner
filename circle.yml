@@ -6,7 +6,6 @@ deployment:
   rubygems:
     branch: master
     commands:
-      - 'rm -v *.gem'
       - "gem build gem-versioner.gemspec"
       - 'echo :rubygems_api_key: ${RUBYGEMS_API_KEY} >  ~/.gem/credentials'
       - "chmod 0600 ~/.gem/credentials"
