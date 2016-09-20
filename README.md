@@ -3,7 +3,7 @@
 
 # Gem::Versioner
 
-This Gem invokes as a plugin for the build task for a Gem
+Gem that works as an extension for the build task of a Gem to allow pre release versions
 
 ## Installation
 
@@ -20,6 +20,9 @@ you can specify a pre release version by
     
 This will build a gem with a version in the following format `${gem_version}.pre.${PRE_RELEASE}.${current_timestamp}` , for example: `0.0.1.pre.foo.20160919174006`
 
+## Publishing
+As soon as a new PR is merged to master CircleCI is responsible to publish the new version of the Gem to https://rubygems.org/
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests.
@@ -31,5 +34,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/Fundin
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+Copyright © 2016 Funding Circle Ltd.
+
+Distributed under the BSD 3-Clause License.
 
