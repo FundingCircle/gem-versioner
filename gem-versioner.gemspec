@@ -6,13 +6,12 @@ require 'rubygems/versioner/version'
 Gem::Specification.new do |spec|
   spec.name = 'gem-versioner'
   spec.version = Gem::Versioner::VERSION
-  spec.authors = 'Funding Circle UK Ltd'
-  spec.email = 'tech@fundingcircle.com'
+  spec.authors = 'Funding Circle Engineering'
+  spec.email = 'engineering+gem-versioner@fundingcircle.com'
 
-  spec.summary = 'Write a short summary, because Rubygems requires one.'
-  spec.description = 'Write a longer description or delete this line.'
-  spec.homepage = 'https://github.com/FundingCircle/gem-versione'
-  spec.license = 'MIT'
+  spec.summary = 'Gem that works as an extension for the build task of a Gem to allow pre release versions'
+  spec.homepage = 'https://github.com/FundingCircle/gem-versioner'
+  spec.license = 'BSD-3'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
