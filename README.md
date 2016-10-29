@@ -9,14 +9,13 @@ A plugin for RubyGems which lets you pass in version strings via a environment v
 
 ## Installation
 
-Install it yourself as:
+Install it yourself:
 
     $ gem install gem-versioner
 
 ## Usage
 
-when you build a gem e.g. `my-gem`
-you can specify a pre release version by
+When you build a gem (e.g. `my-gem`) you can specify a pre release version by
 
     $ PRE_RELEASE=foo build my-gem.gemspec
     
