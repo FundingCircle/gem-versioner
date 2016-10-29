@@ -3,7 +3,7 @@
 
 # Gem::Versioner
 
-Gem that works as an extension for the build task of a Gem to allow pre release versions
+A plugin for RubyGems which lets you pass in version strings via a environment variable.
 
 ## Installation
 
@@ -37,4 +37,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/Fundin
 Copyright © 2016 Funding Circle Ltd.
 
 Distributed under the BSD 3-Clause License.
-

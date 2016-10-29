@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors = 'Funding Circle Engineering'
   spec.email = 'engineering+gem-versioner@fundingcircle.com'
 
-  spec.summary = 'Gem that works as an extension for the build task of a Gem to allow pre release versions'
+  spec.summary = 'A plugin for RubyGems which lets you pass in version strings via a environment variable.'
   spec.homepage = 'https://github.com/FundingCircle/gem-versioner'
-  spec.license = 'BSD-3'
+  spec.license = 'BSD-3-Clause'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
