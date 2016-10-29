@@ -21,6 +21,7 @@ you can specify a pre release version by
 This will build a gem with a version in the following format `${gem_version}.pre.${PRE_RELEASE}.${current_timestamp}` , for example: `0.0.1.pre.foo.20160919174006`
 
 ## Publishing
+
 As soon as a new PR is merged to master CircleCI is responsible to publish the new version of the Gem to https://rubygems.org/
 
 ## Development
@@ -34,6 +35,6 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/Fundin
 
 ## License
 
-Copyright © 2016 Funding Circle Ltd.
+Copyright © 2016 Funding Circle.
 
-Distributed under the BSD 3-Clause License.
+Distributed under the [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause).
