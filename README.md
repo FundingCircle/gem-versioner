@@ -1,9 +1,11 @@
-[![Gem Version](https://badge.fury.io/rb/gem-versioner.svg)](https://badge.fury.io/rb/gem-versioner)
-[![Circle CI](https://circleci.com/gh/FundingCircle/gem-versioner/tree/master.svg?style=shield)](https://circleci.com/gh/FundingCircle/gem-versioner/tree/master)
-
 # Gem::Versioner
 
 A plugin for RubyGems which lets you pass in version strings via a environment variable.
+
+[![Gem Version](https://badge.fury.io/rb/gem-versioner.svg)](https://badge.fury.io/rb/gem-versioner)
+[![Circle CI](https://circleci.com/gh/FundingCircle/gem-versioner/tree/master.svg?style=shield)](https://circleci.com/gh/FundingCircle/gem-versioner/tree/master)
+[![Code Climate](https://codeclimate.com/repos/57e1038454266801670028a7/badges/1c86f236e035426453de/gpa.svg)](https://codeclimate.com/repos/57e1038454266801670028a7/feed)
+[![Dependency Status](https://gemnasium.com/badges/github.com/FundingCircle/gem-versioner.svg)](https://gemnasium.com/github.com/FundingCircle/gem-versioner)
 
 ## Installation
 
