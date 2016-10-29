@@ -1,9 +1,11 @@
-[![Gem Version](https://badge.fury.io/rb/gem-versioner.svg)](https://badge.fury.io/rb/gem-versioner)
-[![Circle CI](https://circleci.com/gh/FundingCircle/gem-versioner/tree/master.svg?style=shield)](https://circleci.com/gh/FundingCircle/gem-versioner/tree/master)
-
 # Gem::Versioner
 
-Gem that works as an extension for the build task of a Gem to allow pre release versions
+A plugin for RubyGems which lets you pass in version strings via a environment variable.
+
+[![Gem Version](https://badge.fury.io/rb/gem-versioner.svg)](https://badge.fury.io/rb/gem-versioner)
+[![Circle CI](https://circleci.com/gh/FundingCircle/gem-versioner/tree/master.svg?style=shield)](https://circleci.com/gh/FundingCircle/gem-versioner/tree/master)
+[![Code Climate](https://codeclimate.com/repos/57e1038454266801670028a7/badges/1c86f236e035426453de/gpa.svg)](https://codeclimate.com/repos/57e1038454266801670028a7/feed)
+[![Dependency Status](https://gemnasium.com/badges/github.com/FundingCircle/gem-versioner.svg)](https://gemnasium.com/github.com/FundingCircle/gem-versioner)
 
 ## Installation
 
@@ -21,6 +23,7 @@ you can specify a pre release version by
 This will build a gem with a version in the following format `${gem_version}.pre.${PRE_RELEASE}.${current_timestamp}` , for example: `0.0.1.pre.foo.20160919174006`
 
 ## Publishing
+
 As soon as a new PR is merged to master CircleCI is responsible to publish the new version of the Gem to https://rubygems.org/
 
 ## Development
@@ -34,7 +37,6 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/Fundin
 
 ## License
 
-Copyright © 2016 Funding Circle Ltd.
+Copyright © 2016 Funding Circle.
 
-Distributed under the BSD 3-Clause License.
-
+Distributed under the [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause).
