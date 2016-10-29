@@ -4,9 +4,10 @@ test:
     - bundle exec pronto run --commit origin/master --exit-code
 deployment:
   rubygems:
-    branch: master
+    tag: /.+/
+    owner: FundingCircle
     commands:
-      - "gem build gem-versioner.gemspec"
+      - "gem build $CIRCLE_PROJECT_REPONAME.gemspec"
       - 'echo :rubygems_api_key: ${RUBYGEMS_API_KEY} >  ~/.gem/credentials'
       - "chmod 0600 ~/.gem/credentials"
-      - "gem push gem-versioner-*.gem"
+      - "gem push $CIRCLE_PROJECT_REPONAME-*.gem"
