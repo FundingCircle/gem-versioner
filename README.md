@@ -24,7 +24,7 @@ This will build a gem with a version in the following format `${gem_version}.pre
 
 ## Publishing
 
-As soon as a new PR is merged to master CircleCI is responsible to publish the new version of the Gem to https://rubygems.org/
+When a new version is tagged and pushed, CircleCI will build and publish the new version of the gem to https://rubygems.org/gems/gem-versioner.
 
 ## Development
 
