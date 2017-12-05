@@ -2,6 +2,8 @@ test:
   pre:
     - bundle exec rubocop
     - bundle exec pronto run --commit origin/master --exit-code
+  post:
+    - bundle exec codeclimate-test-reporter
 deployment:
   rubygems:
     branch: master

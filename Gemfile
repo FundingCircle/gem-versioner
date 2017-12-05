@@ -11,4 +11,9 @@ group :development, :test do
   gem 'pronto-rubocop', require: false
 end
 
+group :test do
+  gem 'codeclimate-test-reporter', require: false
+  gem 'simplecov', require: false
+end
+
 gemspec
