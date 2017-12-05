@@ -3,7 +3,9 @@ require 'yaml'
 
 describe Gem::Versioner do
   let(:current_gem_version) { Gem::Versioner::VERSION }
+  # rubocop:disable Security/YAMLLoad
   let(:gem_spec) { YAML.load(`gem spec gem-versioner*.gem version`) }
+  # rubocop:enable Security/YAMLLoad
 
   before do
     `rm *.gem`
