@@ -6,7 +6,7 @@ jobs:
     steps:
       - run:
           name: Install build packages
-          command: apk add --no-cache --no-progress build-base cmake git
+          command: apk add --no-cache --no-progress build-base cmake curl-dev git
       - checkout
       - run:
           name: Install Code Climate test reporter
