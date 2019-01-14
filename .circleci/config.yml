@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Install dependency packages
-          command: apt-get install -qqy cmake
+          command: sudo apt-get install -qqy cmake
       - run:
           name: Install Code Climate test reporter
           command: |
