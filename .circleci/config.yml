@@ -2,17 +2,16 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4
+      - image: docker.io/library/ruby:2.4-alpine
     steps:
-      - checkout
-      - checkout
       - run:
-          name: Install dependency packages
-          command: sudo apt-get install -qqy cmake
+          name: Install build packages
+          command: apk add --no-cache --no-progress build-base cmake git
+      - checkout
       - run:
           name: Install Code Climate test reporter
           command: |
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            wget -O ./cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
             chmod +x ./cc-test-reporter
       - run:
           name: Install Ruby dependencies
