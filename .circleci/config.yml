@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.4
+    steps:
+      - checkout
+      - checkout
+      - run:
+          name: Install dependency packages
+          command: apt-get install -qqy cmake
+      - run:
+          name: Install Code Climate test reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
+          name: Install Ruby dependencies
+          command: bundle check --path=vendor/bundle | bundle install --path=vendor/bundle
+      - run: bundle exec rubocop
+      - run: bundle exec pronto run --commit origin/master --exit-code
+      - run:
+          name: Run tests
+          command: |
+            ./cc-test-reporter before-build
+            bundle exec rspec --format documentation --color spec
+            ./cc-test-reporter after-build --exit-code $?
+    working_directory: ~/gem-versioner
