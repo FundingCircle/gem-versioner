@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Gem
   # keeps the version of the Versioner
   module Versioner
