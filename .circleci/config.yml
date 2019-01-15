@@ -69,16 +69,19 @@ workflows:
             tags:
               only: /.*/
           image-tag: "2.3-alpine"
+          name: tests-ruby23
       - tests:
           filters:
             tags:
               only: /.*/
           image-tag: "2.4-alpine"
+          name: tests-ruby24
       - tests:
           filters:
             tags:
               only: /.*/
           image-tag: "2.5-alpine"
+          name: tests-ruby25
       - publish-gem:
           filters:
             branches:
@@ -86,5 +89,6 @@ workflows:
             tags:
               only: /v[0-9]+(\.[0-9]+){1,2}$/
           requires:
-            - tests
-          name: tests
+            - tests-ruby23
+            - tests-ruby24
+            - tests-ruby25
