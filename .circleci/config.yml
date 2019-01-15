@@ -1,8 +1,7 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: docker.io/library/ruby:2.4-alpine
+version: 2.1
+commands:
+  tests:
+    description: Build steps for running the test suite
     steps:
       - run:
           name: Install build packages
@@ -24,4 +23,32 @@ jobs:
             ./cc-test-reporter before-build
             bundle exec rspec --format documentation --color spec
             ./cc-test-reporter after-build --exit-code $?
+executors:
+  ruby:
+    parameters:
+      tag:
+        type: string
+        default: "latest"
+    docker:
+      - image: docker.io/library/ruby:<< parameters.tag >>
+jobs:
+  build:
+    parameters:
+      image-tag:
+        type: string
+        default: "latest"
+    executor:
+      name: ruby
+      tag: << parameters.image-tag >>
+    steps:
+      - tests
     working_directory: ~/gem-versioner
+workflows:
+  multiple-ruby-versions:
+    jobs:
+      - build:
+          image-tag: "2.3-alpine"
+      - build:
+          image-tag: "2.4-alpine"
+      - build:
+          image-tag: "2.5-alpine"
