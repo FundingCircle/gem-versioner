@@ -1,22 +1,40 @@
 version: 2.1
 commands:
+  install-gems:
+    description: Steps to install Ruby gems
+      - run:
+          name: Install build packages
+          command: apk add --no-cache --no-progress build-base cmake curl-dev
+      - run:
+          name: Install Ruby dependencies
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+  pronto:
+    description: Runs RuboCop
+    steps:
+      - install-gems
+      - run:
+          name: Run Pronto over commit history
+          command: bundle exec pronto run --commit origin/master --exit-code
+  rubocop:
+    description: Runs RuboCop
+    steps:
+      - install-gems
+      - run:
+          name: Run RuboCop linter
+          command: bundle exec rubocop
   tests:
     description: Build steps for running the test suite
     steps:
       - run:
-          name: Install build packages
-          command: apk add --no-cache --no-progress build-base cmake curl-dev git
+          name: Install git package
+          command: apk add --no-cache --no-progress git
       - checkout
       - run:
           name: Install Code Climate test reporter
           command: |
             wget -O ./cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
             chmod +x ./cc-test-reporter
-      - run:
-          name: Install Ruby dependencies
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
-      - run: bundle exec rubocop
-      - run: bundle exec pronto run --commit origin/master --exit-code
+      - install-gems
       - run:
           name: Run tests
           command: |
@@ -32,6 +50,28 @@ executors:
     docker:
       - image: docker.io/library/ruby:<< parameters.tag >>
 jobs:
+  pronto:
+    parameters:
+      image-tag:
+        type: string
+        default: "latest"
+    executor:
+      name: ruby
+      tag: << parameters.image-tag >>
+    steps:
+      - pronto
+    working_directory: ~/gem-versioner
+  rubocop:
+    parameters:
+      image-tag:
+        type: string
+        default: "latest"
+    executor:
+      name: ruby
+      tag: << parameters.image-tag >>
+    steps:
+      - rubocop
+    working_directory: ~/gem-versioner
   tests:
     parameters:
       image-tag:
@@ -63,6 +103,12 @@ jobs:
 workflows:
   multiple-ruby-versions:
     jobs:
+      - pronto:
+          image-tag: "2.6-alpine"
+          name: pronto
+      - rubocop:
+          image-tag: "2.6-alpine"
+          name: rubocop
       - tests:
           filters:
             tags:
@@ -94,6 +140,8 @@ workflows:
             tags:
               only: /v[0-9]+(\.[0-9]+){1,2}$/
           requires:
+            - pronto
+            - rubocop
             - tests-ruby23
             - tests-ruby24
             - tests-ruby25
