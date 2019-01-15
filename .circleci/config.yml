@@ -12,6 +12,7 @@ commands:
   pronto:
     description: Runs RuboCop
     steps:
+      - checkout
       - install-gems
       - run:
           name: Run Pronto over commit history
@@ -19,6 +20,7 @@ commands:
   rubocop:
     description: Runs RuboCop
     steps:
+      - checkout
       - install-gems
       - run:
           name: Run RuboCop linter
@@ -30,12 +32,12 @@ commands:
           name: Install git package
           command: apk add --no-cache --no-progress git
       - checkout
+      - install-gems
       - run:
           name: Install Code Climate test reporter
           command: |
             wget -O ./cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
             chmod +x ./cc-test-reporter
-      - install-gems
       - run:
           name: Run tests
           command: |
