@@ -127,24 +127,36 @@ workflows:
               only: /.*/
           image-tag: "2.3-alpine"
           name: tests-ruby23
+          requires:
+            - pronto
+            - rubocop
       - tests:
           filters:
             tags:
               only: /.*/
           image-tag: "2.4-alpine"
           name: tests-ruby24
+          requires:
+            - pronto
+            - rubocop
       - tests:
           filters:
             tags:
               only: /.*/
           image-tag: "2.5-alpine"
           name: tests-ruby25
+          requires:
+            - pronto
+            - rubocop
       - tests:
           filters:
             tags:
               only: /.*/
           image-tag: "2.6-alpine"
           name: tests-ruby26
+          requires:
+            - pronto
+            - rubocop
       - publish-gem:
           filters:
             branches:
@@ -152,8 +164,6 @@ workflows:
             tags:
               only: /v[0-9]+(\.[0-9]+){1,2}$/
           requires:
-            - pronto
-            - rubocop
             - tests-ruby23
             - tests-ruby24
             - tests-ruby25
