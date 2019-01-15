@@ -81,6 +81,12 @@ workflows:
               only: /.*/
           image-tag: "2.5-alpine"
           name: tests-ruby25
+      - tests:
+          filters:
+            tags:
+              only: /.*/
+          image-tag: "2.6-alpine"
+          name: tests-ruby26
       - publish-gem:
           filters:
             branches:
@@ -91,3 +97,4 @@ workflows:
             - tests-ruby23
             - tests-ruby24
             - tests-ruby25
+            - tests-ruby26
