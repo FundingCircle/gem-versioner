@@ -43,13 +43,48 @@ jobs:
     steps:
       - tests
     working_directory: ~/gem-versioner
+  publish-gem:
+    docker:
+      - image: docker.io/library/ruby:2.5-alpine
+    steps:
+      - checkout
+      - run:
+          name: Build gem
+          command: gem build $CIRCLE_PROJECT_REPONAME.gemspec
+      - run:
+          name: Configure RubyGems API key
+          command: |
+            echo :rubygems_api_key: "$RUBYGEMS_API_KEY" >  ~/.gem/credentials
+            chmod 0600 ~/.gem/credentials
+      - deploy:
+          name: Push gem to RubyGems
+          command: gem push $CIRCLE_PROJECT_REPONAME-*.gem
+    working_directory: ~/gem-versioner
 workflows:
   version: 2
   multiple-ruby-versions:
     jobs:
       - tests:
+          filters:
+            tags:
+              only: /.*/
           image-tag: "2.3-alpine"
       - tests:
+          filters:
+            tags:
+              only: /.*/
           image-tag: "2.4-alpine"
       - tests:
+          filters:
+            tags:
+              only: /.*/
           image-tag: "2.5-alpine"
+      - publish-gem:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /v[0-9]+(\.[0-9]+){1,2}$/
+          requires:
+            - tests
+          name: tests
