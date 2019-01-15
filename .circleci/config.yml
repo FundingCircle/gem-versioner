@@ -2,6 +2,7 @@ version: 2.1
 commands:
   install-gems:
     description: Steps to install Ruby gems
+    steps:
       - run:
           name: Install build packages
           command: apk add --no-cache --no-progress build-base cmake curl-dev
