@@ -17,7 +17,7 @@ commands:
           paths:
             - vendor/bundle
   pronto:
-    description: Runs RuboCop
+    description: Runs Pronto and its runners
     steps:
       - setup
       - run:
