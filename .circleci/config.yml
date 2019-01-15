@@ -6,9 +6,16 @@ commands:
       - run:
           name: Install build packages
           command: apk add --no-cache --no-progress build-base cmake curl-dev
+      - restore_cache:
+          keys:
+            - gem-versioner-{{ arch }}-{{ checksum "gem-versioner.gemspec" }}
       - run:
           name: Install Ruby dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - save_cache:
+          key: gem-versioner-{{ arch }}-{{ checksum "gem-versioner.gemspec" }}
+          paths:
+            - vendor/bundle
   pronto:
     description: Runs RuboCop
     steps:
