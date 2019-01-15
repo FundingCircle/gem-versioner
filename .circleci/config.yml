@@ -12,27 +12,29 @@ commands:
   pronto:
     description: Runs RuboCop
     steps:
-      - checkout
-      - install-gems
+      - setup
       - run:
           name: Run Pronto over commit history
           command: bundle exec pronto run --commit origin/master --exit-code
   rubocop:
     description: Runs RuboCop
     steps:
-      - checkout
-      - install-gems
+      - setup
       - run:
           name: Run RuboCop linter
           command: bundle exec rubocop
-  tests:
-    description: Build steps for running the test suite
+  setup:
+    description: Set up Ruby gems and required packages
     steps:
       - run:
           name: Install git package
           command: apk add --no-cache --no-progress git
       - checkout
       - install-gems
+  tests:
+    description: Build steps for running the test suite
+    steps:
+      - setup
       - run:
           name: Install Code Climate test reporter
           command: |
