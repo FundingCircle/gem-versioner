@@ -61,7 +61,6 @@ jobs:
           command: gem push $CIRCLE_PROJECT_REPONAME-*.gem
     working_directory: ~/gem-versioner
 workflows:
-  version: 2
   multiple-ruby-versions:
     jobs:
       - tests:
