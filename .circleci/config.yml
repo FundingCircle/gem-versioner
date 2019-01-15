@@ -32,7 +32,7 @@ executors:
     docker:
       - image: docker.io/library/ruby:<< parameters.tag >>
 jobs:
-  build:
+  tests:
     parameters:
       image-tag:
         type: string
@@ -47,9 +47,9 @@ workflows:
   version: 2
   multiple-ruby-versions:
     jobs:
-      - build:
+      - tests:
           image-tag: "2.3-alpine"
-      - build:
+      - tests:
           image-tag: "2.4-alpine"
-      - build:
+      - tests:
           image-tag: "2.5-alpine"
