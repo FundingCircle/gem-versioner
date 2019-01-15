@@ -44,6 +44,7 @@ jobs:
       - tests
     working_directory: ~/gem-versioner
 workflows:
+  version: 2
   multiple-ruby-versions:
     jobs:
       - build:
