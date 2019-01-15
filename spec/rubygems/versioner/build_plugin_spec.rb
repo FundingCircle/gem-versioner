@@ -9,7 +9,13 @@ RSpec.describe Gem::Package do
 
     it 'delegates building a gem version stanza' do
       expect(Gem::Versioner).to receive(:release_version).with('xyz')
-      allow(Gem::Package).to receive(:build_original).with(spec, false).and_return(true)
+
+      if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('3.0.0')
+        allow(Gem::Package).to receive(:build_original).with(spec, false, false, nil).and_return(true)
+      else
+        allow(Gem::Package).to receive(:build_original).with(spec, false).and_return(true)
+      end
+
       described_class.build(spec)
     end
   end
