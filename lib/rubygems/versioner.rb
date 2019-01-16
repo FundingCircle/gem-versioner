@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Gem
   module Versioner
     def self.release_version(gem_version)

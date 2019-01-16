@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 group :development, :test do
@@ -6,7 +8,6 @@ group :development, :test do
   gem 'pronto-fasterer', require: false
   gem 'pronto-rails_best_practices', require: false
   gem 'pronto-rails_schema', require: false
-  gem 'pronto-rubocop', require: false
   gem 'pry'
   gem 'rubocop', require: false
 end

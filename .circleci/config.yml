@@ -1,0 +1,170 @@
+version: 2.1
+commands:
+  install-gems:
+    description: Steps to install Ruby gems
+    steps:
+      - run:
+          name: Install build packages
+          command: apk add --no-cache --no-progress build-base cmake curl-dev
+      - restore_cache:
+          keys:
+            - gem-versioner-{{ arch }}-{{ checksum "gem-versioner.gemspec" }}
+      - run:
+          name: Install Ruby dependencies
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - save_cache:
+          key: gem-versioner-{{ arch }}-{{ checksum "gem-versioner.gemspec" }}
+          paths:
+            - vendor/bundle
+  pronto:
+    description: Runs Pronto and its runners
+    steps:
+      - setup
+      - run:
+          name: Run Pronto over commit history
+          command: bundle exec pronto run --commit origin/master --exit-code
+  rubocop:
+    description: Runs RuboCop
+    steps:
+      - setup
+      - run:
+          name: Run RuboCop linter
+          command: bundle exec rubocop
+  setup:
+    description: Set up Ruby gems and required packages
+    steps:
+      - run:
+          name: Install git package
+          command: apk add --no-cache --no-progress git
+      - checkout
+      - install-gems
+  tests:
+    description: Build steps for running the test suite
+    steps:
+      - setup
+      - run:
+          name: Install Code Climate test reporter
+          command: |
+            wget -O ./cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+            chmod +x ./cc-test-reporter
+      - run:
+          name: Run tests
+          command: |
+            ./cc-test-reporter before-build
+            bundle exec rspec --format documentation --color spec
+            ./cc-test-reporter after-build --exit-code $?
+executors:
+  ruby:
+    parameters:
+      tag:
+        type: string
+        default: "latest"
+    docker:
+      - image: docker.io/library/ruby:<< parameters.tag >>
+jobs:
+  pronto:
+    parameters:
+      image-tag:
+        type: string
+        default: "latest"
+    executor:
+      name: ruby
+      tag: << parameters.image-tag >>
+    steps:
+      - pronto
+    working_directory: ~/gem-versioner
+  rubocop:
+    parameters:
+      image-tag:
+        type: string
+        default: "latest"
+    executor:
+      name: ruby
+      tag: << parameters.image-tag >>
+    steps:
+      - rubocop
+    working_directory: ~/gem-versioner
+  tests:
+    parameters:
+      image-tag:
+        type: string
+        default: "latest"
+    executor:
+      name: ruby
+      tag: << parameters.image-tag >>
+    steps:
+      - tests
+    working_directory: ~/gem-versioner
+  publish-gem:
+    docker:
+      - image: docker.io/library/ruby:2.5-alpine
+    steps:
+      - checkout
+      - run:
+          name: Build gem
+          command: gem build $CIRCLE_PROJECT_REPONAME.gemspec
+      - run:
+          name: Configure RubyGems API key
+          command: |
+            echo :rubygems_api_key: "$RUBYGEMS_API_KEY" >  ~/.gem/credentials
+            chmod 0600 ~/.gem/credentials
+      - deploy:
+          name: Push gem to RubyGems
+          command: gem push $CIRCLE_PROJECT_REPONAME-*.gem
+    working_directory: ~/gem-versioner
+workflows:
+  multiple-ruby-versions:
+    jobs:
+      - pronto:
+          image-tag: "2.6-alpine"
+          name: pronto
+      - rubocop:
+          image-tag: "2.6-alpine"
+          name: rubocop
+      - tests:
+          filters:
+            tags:
+              only: /.*/
+          image-tag: "2.3-alpine"
+          name: tests-ruby23
+          requires:
+            - pronto
+            - rubocop
+      - tests:
+          filters:
+            tags:
+              only: /.*/
+          image-tag: "2.4-alpine"
+          name: tests-ruby24
+          requires:
+            - pronto
+            - rubocop
+      - tests:
+          filters:
+            tags:
+              only: /.*/
+          image-tag: "2.5-alpine"
+          name: tests-ruby25
+          requires:
+            - pronto
+            - rubocop
+      - tests:
+          filters:
+            tags:
+              only: /.*/
+          image-tag: "2.6-alpine"
+          name: tests-ruby26
+          requires:
+            - pronto
+            - rubocop
+      - publish-gem:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /v[0-9]+(\.[0-9]+){1,2}$/
+          requires:
+            - tests-ruby23
+            - tests-ruby24
+            - tests-ruby25
+            - tests-ruby26

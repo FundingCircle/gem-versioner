@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'yaml'
 
@@ -8,6 +10,7 @@ RSpec.describe Gem::Versioner do
   before do
     `rm *.gem`
   end
+
   after do
     `rm *.gem`
   end
