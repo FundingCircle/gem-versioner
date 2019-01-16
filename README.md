@@ -5,7 +5,6 @@ A plugin for RubyGems which lets you pass in version strings via a environment v
 [![Gem Version](https://badge.fury.io/rb/gem-versioner.svg)](https://badge.fury.io/rb/gem-versioner)
 [![Circle CI](https://circleci.com/gh/FundingCircle/gem-versioner/tree/master.svg?style=shield)](https://circleci.com/gh/FundingCircle/gem-versioner/tree/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/94f24a962f337d7f77df/maintainability)](https://codeclimate.com/github/FundingCircle/gem-versioner/maintainability)
-[![Dependency Status](https://gemnasium.com/badges/github.com/FundingCircle/gem-versioner.svg)](https://gemnasium.com/github.com/FundingCircle/gem-versioner)
 
 ## Installation
 
