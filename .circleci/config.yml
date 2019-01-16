@@ -116,9 +116,15 @@ workflows:
   multiple-ruby-versions:
     jobs:
       - pronto:
+          filters:
+            tags:
+              only: /.*/
           image-tag: "2.6-alpine"
           name: pronto
       - rubocop:
+          filters:
+            tags:
+              only: /.*/
           image-tag: "2.6-alpine"
           name: rubocop
       - tests:
