@@ -10,6 +10,7 @@ RSpec.describe Gem::Versioner do
   before do
     `rm *.gem`
   end
+
   after do
     `rm *.gem`
   end
