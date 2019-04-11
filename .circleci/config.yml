@@ -101,6 +101,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install packages required to build the gem
+          command: apk add --no-cache git
+      - run:
           name: Build gem
           command: gem build $CIRCLE_PROJECT_REPONAME.gemspec
       - run:
